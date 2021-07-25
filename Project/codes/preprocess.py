@@ -30,9 +30,31 @@ class Preprocess:
         self.train_set.drop(columns=['year_built', 'floor_count'], inplace=True)
         self.test_set.drop(columns=['year_built', 'floor_count'], inplace=True)
 
+        self.train_set['hour'] = self.train_set['timestamp'].dt.hour
+        self.train_set['day'] = self.train_set['timestamp'].dt.day
+        self.train_set['week'] = self.train_set['timestamp'].dt.isocalendar().week
+        self.train_set['month'] = self.train_set['timestamp'].dt.month
+        self.train_set['year'] = self.train_set['timestamp'].dt.year
+        self.train_set.drop(columns='timestamp', inplace=True)
+
+        self.test_set['hour'] = self.test_set['timestamp'].dt.hour
+        self.test_set['day'] = self.test_set['timestamp'].dt.day
+        self.test_set['week'] = self.test_set['timestamp'].dt.isocalendar().week
+        self.test_set['month'] = self.test_set['timestamp'].dt.month
+        self.test_set['year'] = self.test_set['timestamp'].dt.year
+        self.test_set.drop(columns='timestamp', inplace=True)
+
+    def fill_na(self):
+        na_features = ['air_temperature', 'cloud_coverage', 'dew_temperature', 'precip_depth_1_hr',
+                       'sea_level_pressure', 'wind_direction', 'wind_speed']
+        for feature in na_features:
+            self.train_set[feature] = self.train_set[feature].fillna(self.train_set[feature].mean())
+            self.test_set[feature] = self.test_set[feature].fillna(self.test_set[feature].mean())
+
     def process(self):
         self.data_merge()
         self.categorical()
         self.drop_data()
+        self.fill_na()
         return self.train_set, self.test_set
 
