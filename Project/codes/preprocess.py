@@ -30,6 +30,9 @@ class Preprocess:
         self.train_set.drop(columns=['year_built', 'floor_count'], inplace=True)
         self.test_set.drop(columns=['year_built', 'floor_count'], inplace=True)
 
+        self.train_set['timestamp'] = pd.to_datetime(self.train_set['timestamp'])
+        self.test_set['timestamp'] = pd.to_datetime(self.test_set['timestamp'])
+
         self.train_set['hour'] = self.train_set['timestamp'].dt.hour
         self.train_set['day'] = self.train_set['timestamp'].dt.day
         self.train_set['week'] = self.train_set['timestamp'].dt.isocalendar().week
