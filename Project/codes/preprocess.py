@@ -18,8 +18,8 @@ class Preprocess:
         mr = skmem.MemReducer()
         self.train_set = mr.fit_transform(self.train_set)
 
-        self.test_set = pd.merge(self.test_set, self.building_metadata, on='building_id')
-        self.test_set = pd.merge(self.test_set, self.weather_test_set, on=['site_id', 'timestamp'])
+        self.test_set = pd.merge(self.test_set, self.building_metadata, on='building_id', how='left')
+        self.test_set = pd.merge(self.test_set, self.weather_test_set, on=['site_id', 'timestamp'], how='left')
         mr = skmem.MemReducer()
         self.test_set = mr.fit_transform(self.test_set)
 
