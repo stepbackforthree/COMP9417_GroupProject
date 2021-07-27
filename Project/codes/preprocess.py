@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 import skmem
 
@@ -12,8 +13,8 @@ class Preprocess:
         self.building_metadata = pd.read_csv('../data/building_metadata.csv')
 
     def data_merge(self):
-        self.train_set = pd.merge(self.train_set, self.building_metadata, on='building_id')
-        self.train_set = pd.merge(self.train_set, self.weather_train_set, on=['site_id', 'timestamp'])
+        self.train_set = pd.merge(self.train_set, self.building_metadata, on='building_id', how='left')
+        self.train_set = pd.merge(self.train_set, self.weather_train_set, on=['site_id', 'timestamp'], how='left')
         mr = skmem.MemReducer()
         self.train_set = mr.fit_transform(self.train_set)
 
@@ -36,15 +37,11 @@ class Preprocess:
         self.train_set['hour'] = self.train_set['timestamp'].dt.hour
         self.train_set['day'] = self.train_set['timestamp'].dt.day
         self.train_set['week'] = self.train_set['timestamp'].dt.isocalendar().week
-        self.train_set['month'] = self.train_set['timestamp'].dt.month
-        self.train_set['year'] = self.train_set['timestamp'].dt.year
         self.train_set.drop(columns='timestamp', inplace=True)
 
         self.test_set['hour'] = self.test_set['timestamp'].dt.hour
         self.test_set['day'] = self.test_set['timestamp'].dt.day
         self.test_set['week'] = self.test_set['timestamp'].dt.isocalendar().week
-        self.test_set['month'] = self.test_set['timestamp'].dt.month
-        self.test_set['year'] = self.test_set['timestamp'].dt.year
         self.test_set.drop(columns='timestamp', inplace=True)
 
     def fill_na(self):
@@ -54,10 +51,15 @@ class Preprocess:
             self.train_set[feature] = self.train_set[feature].fillna(self.train_set[feature].mean())
             self.test_set[feature] = self.test_set[feature].fillna(self.test_set[feature].mean())
 
+    def target_smooth(self):
+        self.train_set['meter_reading'] = np.log1p(self.train_set['meter_reading'])
+
     def process(self):
         self.data_merge()
         self.categorical()
         self.drop_data()
         self.fill_na()
-        return self.train_set, self.test_set
+        self.target_smooth()
+        self.train_set.to_feather('../data/preprocessed_train.feather')
+        self.test_set.to_feather('../data/preprocessed_test.feather')
 
