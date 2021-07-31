@@ -2,6 +2,7 @@
 This project has three folder:
 
 (1) codes
+
 preprocess.py (API for reading datasets and doing some preprocessing)
 preprocess_dataset.py (Implement preprocess.py API, this program should run first to produce training and test set for following training, tune and prediction: preprocessed_train.feather, preprocessed_test.feather)
 skmem.py (API from a Kaggle competitor for memory reduction and optimization of dataset, source: https://www.kaggle.com/jpmiller/skmem)
@@ -14,6 +15,7 @@ ridge.py (including the steps of optimize the hyperparameter and ploting the fea
 xgb.py (this is only for testing the performance of xgboost in the train set with relatively high n_estimator for the optimization spending too much time)
 
 (2) data
+
 preprocessed_train.feather (preprocessed training set, can be implemented directly by model to perform 5-fold cross-validation and training)
 preprocessed_test.feather (preprocessed test set, can be implemented directly by model to predict final result that submitted to Kaggle)
 
@@ -29,5 +31,6 @@ Note that If preprocess.py and preprocess_dataset.py are required to test, these
 ******
 
 (3) plot
+
 there are two sub-folder contains graphs of each model. These graphs can also be seen in report. 
 xgb.py will not generate any plot but the performance report in command line.
