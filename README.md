@@ -23,10 +23,15 @@ preprocessed_train.feather (preprocessed training set, can be implemented direct
 preprocessed_test.feather (preprocessed test set, can be implemented directly by model to predict final result that submitted to Kaggle)
 
 train.csv (674MB)
+
 test.csv (1.36GB)
+
 weather_train.csv (7.1MB)
+
 weather_test.csv (14.1MB)
+
 building_metadata.csv (44.4KB)
+
 Above five datasets are not exist originally since they are relatively big, we cannot put them in the submission file, but can be downloaded on the source: https://www.kaggle.com/c/ashrae-energy-prediction/data
 
 ******
