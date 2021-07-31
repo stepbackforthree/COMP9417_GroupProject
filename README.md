@@ -4,10 +4,13 @@ This project has three folder:
 (1) codes
 
 preprocess.py (API for reading datasets and doing some preprocessing)
+
 preprocess_dataset.py (Implement preprocess.py API, this program should run first to produce training and test set for following training, tune and prediction: preprocessed_train.feather, preprocessed_test.feather)
+
 skmem.py (API from a Kaggle competitor for memory reduction and optimization of dataset, source: https://www.kaggle.com/jpmiller/skmem)
 
 random_forests.py (main program for training, tuning and prediction with random forests model)
+
 random_forests_parameters_plot.py (After training, plotting graphs helps tuning each parameters, the plotted graphs are placed in "plot" folder)
 
 ridge.py (including the steps of optimize the hyperparameter and ploting the features weight graph. The plots are also placed in "plot" folder)
