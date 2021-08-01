@@ -20,6 +20,7 @@ xgb.py (this is only for testing the performance of xgboost in the train set wit
 (2) data
 
 preprocessed_train.feather (preprocessed training set, can be implemented directly by model to perform 5-fold cross-validation and training)
+
 preprocessed_test.feather (preprocessed test set, can be implemented directly by model to predict final result that submitted to Kaggle)
 
 train.csv (674MB)
@@ -41,4 +42,5 @@ Note that If preprocess.py and preprocess_dataset.py are required to test, these
 (3) plot
 
 there are two sub-folder contains graphs of each model. These graphs can also be seen in report. 
+
 xgb.py will not generate any plot but the performance report in command line.
