@@ -1,5 +1,5 @@
 # COMP9417_GroupProject
-This project has three folder:
+This project has three folders:
 
 (1) codes
 
