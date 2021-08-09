@@ -3,7 +3,7 @@ This project has three folders:
 
 (1) codes
 
-·preprocess.py (API for reading datasets and doing some preprocessing)
+preprocess.py (API for reading datasets and doing some preprocessing)
 
 preprocess_dataset.py (Implement preprocess.py API, this program should run first to produce training and test set for following training, tune and prediction: preprocessed_train.feather, preprocessed_test.feather)
 
